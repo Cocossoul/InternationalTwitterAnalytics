@@ -6,7 +6,7 @@ __docformat__ = "reStructuredText"
 Final project
 2019-12
 @author: marine.meurillon
-Requirements : googletrans, emoji and python-twitter and their dependancies
+Requirements : googletrans, emoji and tweepy and their dependancies
 install with pip (or pip3)
 
 If any bug occurs, it may be due to changes on Twitter and Google side, provided that APIs are constantly evolving.
@@ -30,11 +30,16 @@ def getUserLanguage(username):
 def getFollowersLanguage(username):
     followers = twi.getFollowers(username)
     if not followers:
-        print(username + " n'a pas de followers. C'est d'une tristesse :(")
-        return ["tristitude"]
+        print(username + " doesn't have any followers except his shadow.")
+        return ["Sadness :(", 100]
     L = []
+    count = 0
+    fCount = len(followers)
+    print("Analysing "+str(fCount)+ " followers")
     for u in followers:
-        lang = getUserLanguage(username)
+        count += 1
+        print(str(count * 100//fCount)+"%")
+        lang = getUserLanguage(u)
         length = len(L)
         exists = False
         for i in range(length):
@@ -48,21 +53,26 @@ def getFollowersLanguage(username):
                         L[i] = L[i - 1]
                         L[i - 1] = tmp
         if not exists:
-            L.append(lang)
+            L.append((lang, 1))
     # returns the most spoke language
     length = len(L)
-    for i in range(length)
+    for i in range(length):
         L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/length)
     return L
 
 def getFollowingsLanguage(username):
     followings = twi.getFollowings(username)
     if not followings:
-        print(username + " ne suit personne. Il ne se laisse pas influencer si facilement.")
-        return ["leaderspeak"]
+        print(username + " follows no one. He's making is own way.")
+        return ["leaderspeak", 100]
     L = []
+    count = 0
+    fCount = len(followings)
+    print("Analysing "+str(fCount)+ " followings")
     for u in followings:
-        lang = getUserLanguage(username)
+        count += 1
+        print(str(count*100//fCount)+"%")
+        lang = getUserLanguage(u)
         length = len(L)
         exists = False
         for i in range(length):
@@ -76,10 +86,10 @@ def getFollowingsLanguage(username):
                         L[i] = L[i - 1]
                         L[i - 1] = tmp
         if not exists:
-            L.append(lang)
+            L.append((lang, 1))
     # returns the most spoke language
     length = len(L)
-    for i in range(length)
+    for i in range(length):
         L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/length)
     return L
 
@@ -87,36 +97,37 @@ def getFollowingsLanguage(username):
 # main loop
 
 print("============================================\n")
-print("Bienvenue dans InternationTwitterAnalytics !")
-print("Ce programme réalisé par Marine Meurillon et son équipe permet de recueillir des statitiques sur les langues parlées par un utilisateur de Twitter et ses proches.")
-print("Entrer \"quitter\" pour quitter")
+print("Welcome in InternationalTwitterAnalytics !")
+print("This software/script made by Marine Meurillon and her team is a tool to gather statistics about spoke languages by a given Twitter user and his relatives")
+print("NB: The language Alien appear whenever Google Translate fails to guess the language or if too many request were sent to its API. Tips : if so, change network to get a new IP address.")
+print("Enter \"quit\" to quit")
 print("\n============================================")
 entree = ""
-while entree != "quitter":
-    entree = raw_input("Veuillez entrer un nom d'utilisateur: ")
-    if entree == "" or entree = "quitter":
+while entree != "quit":
+    entree = input("Please write an username: ")
+    if entree == "" or entree == "quit":
         continue
     if not twi.userExists(entree):
-        print("L'utilisateur "+entree+" n'existe pas !")
+        print("The user "+entree+" doesn't exists or is in private mode!")
         continue
-    print("Utilisateur "+entree+" trouvé!")
-    print("Tentative d'identification de sa langue...")
+    print("User "+entree+" found!")
+    print("Guessing its spoke language...")
     lang = getUserLanguage(entree)
-    print(entree + " parle "+lang+".\nAppuyez sur entrée pour continuer...")
-    raw_input("")
-    print("Identification des langues de sa communauté...")
+    print(entree + " speaks "+lang+".\nPress enter to resume...")
+    input("")
+    print("Guessing his/her community's languages...")
     followersLang = getFollowersLanguage(entree)
     followingsLang = getFollowingsLanguage(entree)
-    print("Affichage des résultats...\n")
+    print("Results :\n")
     print("================================")
-    print("Langues parlées par ses followers :")
+    print("Languages spoke by his/her followers :")
     for fLang in followersLang:
-        print(fLang[0] + " à "+fLang[1] + "%")
-    raw_input("Appuyez sur entrée pour continuer...")
+        print(fLang[0] + " at "+str(fLang[1]) + "%")
+    input("Press enter to resume...")
     print("================================")
-    print("Langues parlées par ceux qu'il suit :")
+    print("Spoke language by whom he/she follows :")
     for fLang in followingsLang:
-        print(fLang[0] + " à "+fLang[1] + "%")
-    raw_input("Appuyez sur entrée pour continuer...")
-print("Merci d'avoir utilisé notre outil !")
+        print(fLang[0] + " at "+str(fLang[1]) + "%")
+    input("Press enter to resume...")
+print("Thanks for using our tool !")
 
