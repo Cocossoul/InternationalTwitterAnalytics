@@ -51,7 +51,7 @@ def getFollowersLanguage(username):
     # returns the most spoke language
     length = len(L)
     for i in range(length):
-        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/length)
+        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/fCount)
     return L
 
 def getFollowingsLanguage(username):
@@ -84,7 +84,7 @@ def getFollowingsLanguage(username):
     # returns the most spoke language
     length = len(L)
     for i in range(length):
-        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/length)
+        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/fCount)
     return L
 
 
