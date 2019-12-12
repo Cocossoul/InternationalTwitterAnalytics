@@ -4,9 +4,7 @@ import emoji
 # variables
 translator = Translator()
 
-languageTab = [("fr","français"), ("en","anglais"), ("de", "allemand"),
-            ("ja", "japonais"), ("it", "italien"), ("es", "espagnol"),("el", "Greek"), ("eo", "Esperanto"), ("af", "Afrikaans"), ("sw", "Swahili"), ("ca", "Catalan"), ("iw", "Hebrew"), ("sv", "Swedish"), ("cs", "Czech"), ("cy", "Welsh"), ("ar", "Arabic"), ("ur", "Urdu"), ("ga", "Irish"), ("eu", "Basque"), ("et", "Estonian"), ("az", "Azerbaijani"), ("id", "Indonesian"), ("ru", "Russian"), ("gl", "Galician"), ("nl", "Dutch"), ("pt", "Portuguese"), ("la", "Latin"), ("tr", "Turkish"), ("tl", "Filipino"), ("ko", "coréen")]
-
+languageTab = [("fr","French"), ("en","English"), ("de", "German"), ("ja", "Japanese"), ("it", "Italian"), ("es", "Spanish"),("el", "Greek"), ("eo", "Esperanto"), ("af", "Afrikaans"), ("sw", "Swahili"), ("ca", "Catalan"), ("iw", "Hebrew"), ("sv", "Swedish"), ("cs", "Czech"), ("cy", "Welsh"), ("ar", "Arabic"), ("ur", "Urdu"), ("ga", "Irish"), ("eu", "Basque"), ("et", "Estonian"), ("az", "Azerbaijani"), ("id", "Indonesian"), ("ru", "Russian"), ("gl", "Galician"), ("nl", "Dutch"), ("pt", "Portuguese"), ("la", "Latin"), ("tr", "Turkish"), ("tl", "Filipino"), ("ko", "Korean"), ("lv", "Latvian"), ("lt", "Lithuanian"), ("th", "Thai"), ("vi", "Vietnamese"), ("gu", "Gujarati"), ("ro", "Romanian"), ("is", "Icelandic"), ("pl", "Polish"), ("ta", "Tamil"), ("yi", "Yiddish"), ("be", "Belarusian"), ("bg", "Bulgarian"), ("uk", "Ukrainian"), ("hr", "Croatian"), ("bn", "Bengali"), ("sl", "Slovenian"), ("ht", "Haitian Creole"), ("da", "Danish"), ("fa", "Persian"), ("hi", "Hindi"), ("fi", "Finnish"), ("hu", "Hungarian"), ("ja", "Japanese"), ("ka", "Georgian"), ("te",  "Telugu"), ("zh-TW", "Chinese Traditional"), ("sq", "Albanian"), ("no", "Norwegian"), ("ko", "Korean"), ("kn", "Kannada"), ("mk", "Macedonian"), ("zh-CN", "Chinese Simplified"), ("sk", "Slovak"), ("mt", "Maltese"), ("ms", "Malay"), ("sr", "Serbian")]
 
 # hand-made function library
 def languageName(abrev):
@@ -22,7 +20,11 @@ def detectInputsLanguage(sentences):
     L = []
     for s in sentences:
         s = remove_emoji(s)
-        d = translator.detect(s)
+        d = None
+        try:
+            d = translator.detect(s)
+        except Exception:
+            continue
         length = len(L)
         exists = False
         for i in range(length):
@@ -42,4 +44,6 @@ def detectInputsLanguage(sentences):
                 j += 1
             L.insert(j, d)
     # returns the most spoke language
+    if not L:
+        return "Alien"
     return languageName(L[0].lang)
