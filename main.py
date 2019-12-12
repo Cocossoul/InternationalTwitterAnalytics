@@ -13,12 +13,6 @@ If any bug occurs, it may be due to changes on Twitter and Google side, provided
 """
 
 
-
-"""lv : Latvian, lt : Lithuanian, th : Thai, vi : Vietnamese, gu : Gujarati, ro : Romanian, 
-is : Icelandic, pl : Polish, ta : Tamil, yi : Yiddish, be : Belarusian, fr : French, bg : Bulgarian, uk : Ukrainian,
- hr : Croatian, bn : Bengali, sl : Slovenian, ht : Haitian Creole, da : Danish, fa : Persian, hi : Hindi,
- fi : Finnish, hu : Hungarian, ja : Japanese, ka : Georgian, te : Telugu, zh-TW : Chinese Traditional, sq : Albanian, no : Norwegian, 
-ko : Korean, kn : Kannada, mk : Macedonian, zh-CN : Chinese Simplified, sk : Slovak, mt : Maltese, de : German, ms : Malay, sr : Serbian"""
 # imports
 import translate
 import twi
