@@ -24,20 +24,20 @@ def getFirstsTweets(username):
 def getFollowers(username):
     L = []
     i = 0
-    for f in tweepy.Cursor(api.followers, screen_name = username, count = 100).items():
+    for f in tweepy.Cursor(api.followers, screen_name = username, count = 50).items():
         L.append(f.screen_name)
         i+=1
-        if i > 99:
+        if i > 49:
             return L
     return L
 
 def getFollowings(username):
     L = []
     i = 0
-    for f in tweepy.Cursor(api.friends, screen_name = username, count = 100).items():
+    for f in tweepy.Cursor(api.friends, screen_name = username, count = 50).items():
         L.append(f.screen_name)
         i+=1
-        if i > 99:
+        if i > 49:
             return L
     return L
 

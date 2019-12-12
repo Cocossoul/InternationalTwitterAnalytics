@@ -45,5 +45,5 @@ def detectInputsLanguage(sentences):
             L.insert(j, d)
     # returns the most spoke language
     if not L:
-        return "Alien"
+        return "Foreign"
     return languageName(L[0].lang)

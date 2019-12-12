@@ -51,7 +51,7 @@ def getFollowersLanguage(username):
     # returns the most spoke language
     length = len(L)
     for i in range(length):
-        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/length)
+        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/fCount)
     return L
 
 def getFollowingsLanguage(username):
@@ -84,7 +84,7 @@ def getFollowingsLanguage(username):
     # returns the most spoke language
     length = len(L)
     for i in range(length):
-        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/length)
+        L[i] = (translate.languageName(L[i][0]), (100 * L[i][1])/fCount)
     return L
 
 
@@ -92,8 +92,8 @@ def getFollowingsLanguage(username):
 
 print("============================================\n")
 print("Welcome in InternationalTwitterAnalytics !")
-print("This software/script made by Marine Meurillon and her team is a tool to gather statistics about spoke languages by a given Twitter user and his relatives")
-print("NB: The language Alien appear whenever Google Translate fails to guess the language or if too many request were sent to its API. Tips : if so, change network to get a new IP address.")
+print("This software/script made by Marine Meurillon and her team is a tool to gather statistics about spoken languages by a given Twitter user and his relatives")
+print("NB: The language Foreign appears whenever Google Translate fails to guess the language or if too many request were sent to its API. Tips : if so, change network to get a new IP address.")
 print("Enter \"quit\" to quit")
 print("\n============================================")
 entree = ""
@@ -105,7 +105,7 @@ while entree != "quit":
         print("The user "+entree+" doesn't exists or is in private mode!")
         continue
     print("User "+entree+" found!")
-    print("Guessing its spoke language...")
+    print("Guessing his/her spoken language...")
     lang = getUserLanguage(entree)
     print(entree + " speaks "+lang+".\nPress enter to resume...")
     input("")
@@ -114,12 +114,12 @@ while entree != "quit":
     followingsLang = getFollowingsLanguage(entree)
     print("Results :\n")
     print("================================")
-    print("Languages spoke by his/her followers :")
+    print("Languages spoken by his/her followers :")
     for fLang in followersLang:
         print(fLang[0] + " at "+str(fLang[1]) + "%")
     input("Press enter to resume...")
     print("================================")
-    print("Spoke language by whom he/she follows :")
+    print("Spoken languages by whom he/she follows :")
     for fLang in followingsLang:
         print(fLang[0] + " at "+str(fLang[1]) + "%")
     input("Press enter to resume...")
