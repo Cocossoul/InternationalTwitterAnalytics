@@ -5,7 +5,7 @@ __docformat__ = "reStructuredText"
 """
 Final project
 2019-12
-@author: marine.meurillon
+@author: cocossoul
 Requirements : googletrans, emoji and tweepy and their dependancies
 install with pip (or pip3)
 
